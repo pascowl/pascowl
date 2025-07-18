@@ -1,0 +1,71 @@
+baseURL = 'https://pascowl.com/'
+languageCode = 'en-us'
+title = "Pascowl's Terminal"
+theme = "terminalcv"
+[params]
+version = "2.0.0"
+description = "My terminal CV"
+blog = true
+listLS = true
+exitMessage = "[Session completed, the browser window can be safely closed]"
+source = true
+
+[params.prompt.extra]
+text = "Type 'help' for available commands: "
+color = "green"
+
+[params.whois.details]
+name = "'P' for Pascowl."
+profession = "Internet: https://youtu.be/fzirfZMWHyo"
+email = "fetal-coil-capsize@duck.com"
+coordinates = "59°21′N 18°4′E"
+
+[[params.education.details]]
+courseName = "University (2 yrs.)"
+color = "purple"
+date = "2020 — 2025"
+description = "English Translation (Formal Education)"
+
+[[params.education.details]]
+courseName = "University (2 yrs.)"
+color = "purple"
+date = "2017 — 2023"
+description = "Web Design (Open Education) "
+
+[[params.education.details]]
+courseName = "University (2 yrs.)"
+color = "purple"
+date = "2017 — 2020"
+description = "Graphic Design (Formal Education) "
+
+[[params.education.details]]
+courseName = "High School (4 yrs.)"
+color = "purple"
+date = "2005 — 2008"
+description = "Electronic (Formal Education)"
+
+[[params.education.details]]
+courseName = "Elementary (4 yrs.) & Middle School (4 yrs.)"
+color = "purple"
+date = "1996 — Jun 2004"
+description = "Primary (Formal Education)"
+
+[[params.languages.details]]
+name = "English"
+percentage = 80
+
+[[params.languages.details]]
+name = "Swedish"
+percentage = 90
+
+[[params.projects.details]]
+title = "Vim Keybinding for Kdenlive"
+color = "purple"
+link = "https://github.com/pascowl/dotfiles/blob/main/kdenlive"
+description = "Vim-like hotkeys for Kdenlive"
+
+# [[params.projects.details]]
+# title = "Project Blue"
+# color = "blue"
+# date = "since 2016"
+# link = "https://example.com/blue"
