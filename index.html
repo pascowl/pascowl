@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w2.org/1999/xhtml">
+<script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><html lang="en">
+    <head>
+	<meta name="generator" content="Hugo 0.147.9">
+            <meta charset="utf-8" />
+    <title>Pascowl&#39;s Terminal </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My terminal CV">
+    <meta property="og:title" content="Pascowl&#39;s Terminal" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://localhost:1313/" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href=""/>
+    <link rel="canonical" href="http://localhost:1313/" />    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.42.2/js/jquery.terminal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/less.min.js"></script>
+    <script src="https://unpkg.com/jquery.terminal/js/autocomplete_menu.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.42.0/css/jquery.terminal.min.css" rel="stylesheet"/>
+
+<style>
+    body {
+        width: 100%;
+        font-size: 18px;
+    }
+    .terminal, .terminal > div {
+        font-size: 18px !important;
+    }
+</style>
+
+
+
+
+
+    </head>
+        <body>
+        
+<script>
+jQuery(document).ready(function($) {
+    var animation = false;
+
+    var commands = {
+        whois: "about the author",
+        ls: "list posts",
+        education: "education history",
+        languages: "spoken languages",
+        projects: "open source projects",
+        less: "reduce output information",
+        help: "list available commands",
+        clear: "clear terminal screen"
+    };
+
+    function progressBar(number) {
+        var barLength = Math.round(number / 10);
+        var barFilled = Array(barLength + 1).join("&#9611;");
+        var barBlank= Array(11 - barLength).join("&#9617;");
+
+        return barFilled + barBlank
+    }
+
+    
+    function padKey(key, length) {
+        return key + ' '.repeat(length - key.length);
+    }
+
+    function commandsHelp() {
+        let longestKeyLength = Math.max(...Object.keys(commands).map(key => key.length));
+
+        let helpText = ""
+        for (let key in commands) {
+            if (commands.hasOwnProperty(key)) {
+                helpText += ` ${padKey(key, longestKeyLength)}\t${commands[key]}\n`
+            }
+        }
+        return helpText
+    }
+
+    var help = '\n[[b;white;]usage:]\n' +
+                ' <command> - execute the command\n' +
+                ' less <command> - display the output\n\n' +
+                '\n[[b;white;]commands:]\n' +
+               commandsHelp();
+
+    var whois = [
+    
+        '[[b;grey;]Name:]\t\t\t\u0027P\u0027 for Pascowl.\n' +
+        '[[b;grey;]Profession:]\t\tInternet: https:\/\/youtu.be\/fzirfZMWHyo\n' +
+        
+        '[[b;grey;]Email:]\t\t\tfetal-coil-capsize@duck.com\n' +
+        
+        
+        '[[b;grey;]Coordinates:]\t59°21′N 18°4′E\n' +
+        
+        '\r',
+    
+    ];
+    function social() {
+        var hideName = false;
+        let sMap = {
+            
+        };
+
+        
+        socialText = []
+        for (let key in sMap) {
+            if (sMap.hasOwnProperty(key)) {
+                if (hideName) {
+                    socialText.push(sMap[key]);
+                } else {
+                    let longestKeyLength = Math.max(...Object.keys(sMap).map(key => key.length));
+                    socialText.push(`${padKey(key, longestKeyLength)}\t${sMap[key]}`)
+                };
+            }
+        }
+
+        return socialText
+    };
+
+    function posts(term) {
+        $.ajax({
+            url: "posts/",
+            type: 'GET',
+            success: function(data) {
+                term.echo(data, {raw: true});
+            },
+            error: function() {
+                term.echo("Error: Could not load posts data");
+            }
+        });
+    };
+
+
+    function catPost(term, postdir) {
+        url = "/posts/" + postdir + "/";
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(data) {
+                term.echo(data, {raw: true});
+            },
+            error: function() {
+                term.echo("Error: Could not load post " + postdir);
+            }
+        });
+    }
+    var education = [
+    
+        
+            '---\n' +
+            '[[b;purple;]University (2 yrs.)]\n' +
+            '2020 — 2025\n' +
+            
+                "English Translation (Formal Education)\n" +
+            
+            "\r",
+        
+            '---\n' +
+            '[[b;purple;]University (2 yrs.)]\n' +
+            '2017 — 2023\n' +
+            
+                "Web Design (Open Education) \n" +
+            
+            "\r",
+        
+            '---\n' +
+            '[[b;purple;]University (2 yrs.)]\n' +
+            '2017 — 2020\n' +
+            
+                "Graphic Design (Formal Education) \n" +
+            
+            "\r",
+        
+            '---\n' +
+            '[[b;purple;]High School (4 yrs.)]\n' +
+            '2005 — 2008\n' +
+            
+                "Electronic (Formal Education)\n" +
+            
+            "\r",
+        
+            '---\n' +
+            '[[b;purple;]Elementary (4 yrs.) \u0026 Middle School (4 yrs.)]\n' +
+            '1996 — Jun 2004\n' +
+            
+                "Primary (Formal Education)\n" +
+            
+            "\r",
+        
+    
+    ];
+
+    var projects = [
+    
+        
+            '---\n' +
+            '[[b;purple;]Vim Keybinding for Kdenlive]\n' +
+            '\n' +
+            'https:\/\/github.com\/pascowl\/dotfiles\/blob\/main\/kdenlive\n' +
+            
+            'Vim-like hotkeys for Kdenlive\n' +
+            
+            "\r",
+      
+    
+    ];
+    var languages = [
+    
+        
+            '[[b;grey;]English:]\n' +
+            progressBar( 80 )+
+            '80' + '%\n' +
+            
+            '\r',
+        
+            '[[b;grey;]Swedish:]\n' +
+            progressBar( 90 )+
+            '90' + '%\n' +
+            
+            '\r',
+        
+    
+    ];
+    var source =  '        _______            \n' +
+                  '       |       |           \n' +
+                  '       |       |           \n' +
+                  '       |_______|_______    \n' +
+                  '               |       |   \n' +
+                  '               |       |   \n' +
+                  ' ______________|_______|   \n' +
+                  '|      |       |       |   \n' +
+                  '|      |       |       |   \n' +
+                  '|______|_______|_______|   \n' +
+                  '[[;red;]May the source be with you]\n' +
+                  '[[;grey;]https://github.com/coolapso/hugo-theme-terminalcv\n';
+
+    var all = [
+        whois,
+        education,
+        languages,
+        projects,
+        
+        source,
+        
+    ]
+
+    $('body').terminal(function(command, term) {
+
+        var useLess = false;
+        
+
+        function echoArray(array) {
+            if (useLess) {
+                term.less(array);
+            } else {
+                for (i = 0; i < array.length; i += 1) {
+                    term.echo(array[i]);
+                }
+            }
+        }
+        
+        function progress(percent, width) {
+            var size = Math.round(width*percent/100);
+            var left = '', taken = '', i;
+            for (i=size; i--;) {
+                taken += '=';
+            }
+            if (taken.length > 0) {
+                taken = taken.replace(/=$/, '>');
+            }
+            for (i=width-size; i--;) {
+                left += ' ';
+            }
+            return '[' + taken + left + '] ' + percent + '%';
+        }
+
+        function loading () {
+            var i = 0, size = 30;
+            prompt = term.get_prompt();
+            string = progress(0, size);
+            term.set_prompt(progress);
+            animation = true;
+            (function loop() {
+                string = progress(i++, size);
+                term.set_prompt(string);
+                if (i < 100) {
+                    timer = setTimeout(loop, 10);
+                } else {
+                    term.echo(progress(i, size) + ' [[b;green;]OK]').set_prompt(prompt);
+                    animation = false
+                }
+            })();
+        }
+
+        commands = command.split(/[ ]+/);
+        if (commands[0] == 'less') {
+            useLess = true;
+            commands.shift();
+        }
+
+        switch(commands[0]) {
+            case 'whois':
+                
+                echoArray(whois);
+                break;
+            case 'education':
+                
+                echoArray(education);
+                break;
+            case 'languages':
+                
+                echoArray(languages);
+                break;
+            case 'projects':
+                
+                echoArray(projects);
+                break;
+            case 'help':
+            case '?':
+                term.echo(help);
+                break;
+            case 'all':
+                
+                echoArray(all.flat(1));
+                break;
+            
+            case ':(){:|:&};:':
+                term.echo("nice try");
+                break;
+            case 'exit':
+            
+                term.echo("Terminating session, thanks for visiting");
+                loading();
+                setTimeout(function() {
+                  term.pause();
+                  term.clear();
+                  term.echo("[Session completed, the browser window can be safely closed]");
+                }, 2000);
+                break;
+            
+            
+            case 'cat':
+                if (commands.length < 2) {
+                    term.echo("Usage: cat <filename>");
+                } else {
+                    var  postdir = commands[1];
+                    catPost(term, postdir);
+                }
+                break;
+            case 'ls':
+                posts(term);
+                break;
+            
+            case '':
+                break;
+            default:
+                term.echo("\nunknown command: " + command + "\n" +
+                          "please type 'help' or '?' for a list of available commands\n");
+        }
+    }, {
+
+        
+          greetings: "[[b;white;]]",
+        
+
+        prompt: '[[;green;]Type \u0027help\u0027 for available commands: ]',
+
+        keydown: function(e, term) {
+            if (animation) {
+                if (e.which == 68 && e.ctrlKey) { 
+                    clearTimeout(timer);
+                    animation = false;
+                    term.echo(string + ' [[b;red;]FAIL]')
+                    .set_prompt(prompt);
+                }
+                return false;
+            }
+        },
+        autocompleteMenu: true,
+        completion: Object.keys(commands)
+
+    });
+});
+</script>
+
+        </body>
+</html>
